@@ -2,7 +2,7 @@ from numpy import float32, float64, log
 import matplotlib.pyplot as plt
 
 ln2=log(2)
-N = 7
+N = 8
 
 
 def find_sum(n, order=0, num_type=float32):
