@@ -51,5 +51,5 @@ print('1e-16 + 1e-16 < eps/2: ',small_num + small_num < eps64/2)
 print(f'формат{' '*6}p{' '*3}Emin{' '*3}Emax{' '*5}ϵ{' '*23}u')
 p32 = 1-log2(eps32)
 
-print(f'binary32: {p32} | {find_E_min(float32(1.0), eps32)} | {find_E_max(float32(1.0))} | {eps32} | {eps32}' )
-print(f'binary64: {1-log2(eps64)} | {find_E_min(float64(1.0), eps64)} | {find_E_max(float64(1.0))} | {eps64} | {eps64}')
+print(f'binary32: {p32} | {find_E_min(float32(1.0), eps32)} | {find_E_max(float32(1.0))} | {eps32} | {eps32/2}' )
+print(f'binary64: {1-log2(eps64)} | {find_E_min(float64(1.0), eps64)} | {find_E_max(float64(1.0))} | {eps64} | {eps64/2}')

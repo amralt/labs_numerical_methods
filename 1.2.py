@@ -7,7 +7,7 @@ N = 8
 
 def find_sum(n, order=0, num_type=float32):
     s = num_type(0.0)
-    l = range(1, n)
+    l = range(1, n+1)
     if(order == -1):
         l=reversed(l)
     
