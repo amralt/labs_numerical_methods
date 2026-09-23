@@ -6,7 +6,7 @@ def find_E_min(num, eps):
     while num * (1 + eps) != num:
         num /= 2
         e_min -= 1
-    return e_min
+    return e_min + 1 # у меня получилось субнормальное число
 
 def find_E_max(n: float32 | float64):
     e_max = 0
@@ -14,7 +14,7 @@ def find_E_max(n: float32 | float64):
         while n*2 > n:  
             n *= 2
             e_max += 1
-    return e_max
+    return e_max - 1
 
 
 def find_eps(num, eps):
