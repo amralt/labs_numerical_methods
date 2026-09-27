@@ -3,10 +3,14 @@ from numpy import float32, float64, nextafter, inf, log2, errstate
 
 def find_E_min(num, eps):
     e_min = 0
-    while num * (1 + eps) != num:
+    #while num * (1 + eps) != num:
+    while num + num*eps != num:
         num /= 2
         e_min -= 1
-    return e_min + 1 # у меня получилось субнормальное число
+    print("пояснение ", eps*num)
+    return e_min + 1 
+
+# eps = 2^(-23) 
 
 def find_E_max(n: float32 | float64):
     e_max = 0
@@ -21,6 +25,7 @@ def find_eps(num, eps):
     while num + eps/2 != num:
         eps = eps/2
     return eps
+
 
 num32 = float32(1.0)
 eps32 = float32(1.0)

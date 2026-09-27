@@ -1,8 +1,9 @@
-from numpy import float32, float64, log
+from numpy import float32, float64, log, nextafter
 import matplotlib.pyplot as plt
+import time
 
 ln2=log(2)
-N = 8
+N = 6
 
 
 def find_sum(n, order=0, num_type=float32):
@@ -43,13 +44,21 @@ print("ошибка усечения: ", error_S10k - 1/(n10k+1))
 err_usech_fwd, err_usech_bwd, err_usech_sep = [], [], []
 err_comp_fwd, err_comp_bwd, err_comp_sep = [], [], []
 
+time_val = []
+
 for i in range(1, N):
     n = pow(10, i)
 
     s64 = find_sum(n, 0, float64)
 
-    s32_fwd = find_sum(n, 0, float32)
+    t_start = time.time_ns()
+    # САМЫЙ КРУТОЙ МЕТОД!
     s32_bwd = find_sum(n, -1, float32)
+    t_end = time.time_ns() 
+    time_val.append(t_end-t_start)
+
+
+    s32_fwd = find_sum(n, 0, float32)
     s32_sep = find_sep_sum(n, float32)
 
     # ошибка усечения
@@ -97,5 +106,21 @@ plt.yscale("log")
 plt.xlabel("n")
 plt.ylabel("ошибка")
 plt.legend()
-plt.show()
+# plt.show()
 plt.savefig('график ошибок.png')
+plt.close()
+
+
+# еще график ошибки от времени для лучшего метода экстраполировать до eps
+
+# надо попробовать линейную функцию сдлетаь
+# x1 = err_comp_bwd[.]
+
+eps = nextafter(float32(1), float32(2)) -1
+plt.figure(figsize =(10, 5))
+plt.loglog(time_val, err_comp_bwd)
+
+plt.xlabel("время")
+plt.ylabel("ошибка")
+plt.savefig('ошибка от времени.png')
+
