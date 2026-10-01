@@ -1,9 +1,9 @@
-from numpy import float32, float64, log, nextafter
+from numpy import float32, float64, log, nextafter, exp
 import matplotlib.pyplot as plt
 import time
 
 ln2=log(2)
-N = 6
+N = 8
 
 
 def find_sum(n, order=0, num_type=float32):
@@ -113,14 +113,23 @@ plt.close()
 
 # еще график ошибки от времени для лучшего метода экстраполировать до eps
 
-# надо попробовать линейную функцию сдлетаь
-# x1 = err_comp_bwd[.]
+e1, t1 = err_usech_bwd[-1], time_val[-1]
+e2, t2 = err_usech_bwd[-2], time_val[-2]
 
-eps = nextafter(float32(1), float32(2)) -1
+k = (t1 - t2) / (e1 - e2)
+b = t1-k*e1
+eps = nextafter(float32(1), float32(2)) - 1
+log_e_time = k * log(eps) + b
+e_time = exp(log_e_time)
+
+#time_val.append(e_time)
+#err_usech_bwd.append(eps)
+
 plt.figure(figsize =(10, 5))
-plt.loglog(time_val, err_comp_bwd)
-
+plt.loglog(time_val, err_usech_bwd) 
 plt.xlabel("время")
 plt.ylabel("ошибка")
+plt.grid(True, which="both", ls="--")
 plt.savefig('ошибка от времени.png')
 
+#print(err_comp_bwd)
