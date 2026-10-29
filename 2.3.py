@@ -1,7 +1,7 @@
 import numpy as np
 
 eps = np.nextafter(1, np.float32(2)) - 1
-eps *= 100
+#eps *= 100
 MAX_ITER = 10000   
 x_ref = 0.7034395711636399 # тут до 2^(-50)
 

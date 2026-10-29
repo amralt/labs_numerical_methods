@@ -57,27 +57,32 @@ def plot_en(history, label, fname):
 en1, en2 = [], []
 nm_1, en1, en2 = newton_method(f, iter_formula1, 1)
 print('обычный метод', len(nm_1))
-plot_en(en1, 'en/prev_en', ' en prev_en обычный м. Ньютона.svg' )
-plot_en(en2, 'en/prev_en', ' en prev_en^2 обычный м. Ньютона.svg' )
+plot_en(en1, 'en/prev_en', 'графики/en prev_en обычный м. Ньютона.svg' )
+plot_en(en2, 'en/prev_en', 'графики/en prev_en^2 обычный м. Ньютона.svg' )
+
+# plot_en([(i, nm_1[i][2]) for i in range(len(nm_1))], 'график ошибки |xn+1 − xn| ', 'графики/график ошибки м. Ньютона.svg' )
+
 
 en1.clear()
 en2.clear()
 nm_2,en1, en2 = newton_method(f, iter_formula2, 1)
 print('модифицированный метод:\nen/prev_en      en/prev_en^2', len(nm_2))
-plot_en(en1, 'en/prev_en', ' en prev_en мод. м. Ньютона.svg' )
-plot_en(en2, 'en/prev_en', ' en prev_en^2 мод м. Ньютона.svg' )
-
-with open('newton_method_1.txt', 'w') as f:
+plot_en(en1, 'en/prev_en', 'графики/en prev_en мод. м. Ньютона.svg' )
+plot_en(en2, 'en/prev_en', 'графики/en prev_en^2 мод м. Ньютона.svg' )
+# en prev_en мод. 
+with open('txt/newton_method_1.txt', 'w') as f:
     i = 0
     print(f"n, {' '*10} xn, {' '*10} |f(xn)| {' '*10} |xn+1 − xn| ", file=f)
     for line in nm_1:
+        i+=1
         print(i, ":", line, file=f)
 
 
-with open('newton_method_2.txt', 'w') as f:
+with open('txt/newton_method_2.txt', 'w') as f:
     i = 0
     print(f"n, {' '*10} xn, {' '*10} |f(xn)| {' '*10} |xn+1 − xn| ", file=f)
     for line in nm_2:
+        i+=1
         print(i, ":", line, file=f)
 
 # print(nm_1)
